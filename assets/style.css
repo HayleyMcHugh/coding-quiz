@@ -1,0 +1,15 @@
+body {background-color: rgb(233, 211, 214);}
+
+h1 {
+    text-align: center;
+    margin-top: 5%;
+}
+
+p {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 30%;
+    margin-right: 30%;
+}
