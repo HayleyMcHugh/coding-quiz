@@ -2,14 +2,69 @@
 <html lang= "en">
   <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css"/>
     <title>The Coding Quiz</title>
   </head>
+
   <body>
-      <header>
-       <h1>The Coding Quiz</h1> 
-       <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten seconds!</p>
-      </header>
-    <script src="./assets/script.js"></script>
+      <div class="home-container">
+        <div id="home" class="flex-column flex-center">
+          <h1>The Coding Quiz</h1> 
+          <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten seconds!</p>
+          <p class="start-button">Start Quiz</p>
+          <p id="highscore-button" class="highscore-button">High Scores</p>
+        </div>
+      </div>
+
+      <div class="game-container" style="display: none;">
+        <div id="game" class="justify-center flex-column">
+            <div id="hud">
+              <div class="hud=item">
+                <p class="hud-prefix">
+                  Score
+                </p>
+                <h2 class="hud-main-text" id="score">
+                  0
+                </h2>
+                <div class="hud-item">
+                  <p class="hud=prefix">
+                    Question:
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div id="question"></div>
+            <div class="choice-container">
+              <!-- <p class="choice-prefix">A</p>
+              <p class="choice-text" data-number="1">Choice 1</p>
+            </div>
+            <div class="choice-container">
+              <p class="choice-prefix">B</p>
+              <p class="choice-text" data-number="2">Choice 2</p>
+            </div>
+            <div class="choice-container">
+              <p class="choice-prefix">C</p>
+              <p class="choice-text" data-number="3">Choice 3</p>
+            </div>
+            <div class="choice-container">
+              <p class="choice-prefix">D</p>
+              <p class="choice-text" data-number="4">Choice 4</p> -->
+            </div>
+        </div>
+      </div>
+
+      <div class="score-container">
+        <div id="end" class="flex-center flex-column">
+          <h2 id="finalScore">0</h2>
+          <form class="end-form-container">
+            <h3 id="end-text">Enter your initials below to save your score!</h3>
+            <input type="text" name="name" id="username" placeholder="Enter your initials">
+            <button class="button" id="saveScoreButton" type="submit" onclick="saveHighScore(event)">Save</button>
+          </form>
+          <a href="" class="button">Play Again</a>
+        </div>
+      </div>
+      <script src="./assets/script.js"></script>
   </body>    
 </html>
