@@ -1,157 +1,141 @@
-var question = document.querySelector('#question')
-var choices = document.querySelectorAll('.choice-text')
-var scoreText = document.querySelector('#score')
-var startButton = document.querySelector('.start-button')
-var gameContainer = document.querySelector('.game-container')
-var homeContainer = document.querySelector('.home-container')
+var homeContainer = document.querySelector(".home-container")
+var startBtn = homeContainer.querySelector(".start-btn button")
+var quizContainer = document.querySelector(".quiz-container")
+var timeCount = quizContainer.querySelector(".timer .timer-seconds")
+var optionList = document.querySelector(".option-list")
 
-let currentQuestion = {}
-let acceptingAnswers = true
-let score = 0
-let questionCounter = 0
-let availableQuestions = []
+startBtn.onclick = ()=>{  
+    homeContainer.classList.add("deactivateHome");
+    quizContainer.classList.add("activeQuiz"); 
+    showQuestions(0);
+    startTimer(30);
+}
 
 let questions = [
     {
-        question: 'Commonly used data types do not include:',
-        choices: ['strings','booleans','alerts','numbers'],
-        answer: 'alerts'
+        number: 1,
+        question: "Commonly used data types DO NOT include:",
+        answer: "alerts",
+        options: [
+            "strings",
+            "booleans",
+            "alerts",
+            "numbers"
+        ]
     }, 
     {
-        question: 'The condition in an if/else statement is enclosed within ________ ?',
-        choices: ['quotes','parentheses','curly brackets','square brackets'],
-        answer: 'curly brackets'
+        number: 2,
+        question: "The condition in an if/else statement is enclosed within ________ ?",
+        answer: "parentheses",
+        options: [
+            "quotes",
+            "parentheses",
+            "curly brackets",
+            "square brackets"
+        ]
     }, 
     {
-        question: 'Arrays in javascript can be used to store ______.',
-        choices: ['numbers and strings','other arrays','booleans','all of the above'],
-        answer: 'all of the above'
+        number: 3,
+        question: "Arrays in javascript can be used to store ______.",
+        answer: "all of the above",
+        options: [
+            "numbers and strings",
+            "other arrays",
+            "booleans",
+            "all of the above"
+        ]
     }, 
     {
-        question: 'String values must be enclosed within _______ when being assigned to variables.',
-        choices: ['commas','curly brackets','quotes','parentheses'],
-        answer: 'quotes'
+        number: 4,
+        question: "String values must be enclosed within _______ when being assigned to variables.",
+        answer: "quotes",
+        options: [
+            "commas",
+            "curly brackets",
+            "quotes",
+            "parentheses"
+        ]
     }, 
     {
-        question: 'A very useful tool used during development and debugging for printing content to the debugger is:',
-        choices: ['Javascript','terminal/bash','for loops','console.log'],
-        answer: 'console.log'
+        number: 5,
+        question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        answer: "console.log",
+        options: [
+            "Javascript",
+            "terminal/bash",
+            "for loops",
+            "console.log"
+        ]
     }
 ]
 
-var SCORE_POINTS = 100
+let questionCount = 0;
+let counter;
+let scoreContainer = document.querySelector(".score-container");
+let restartQuiz = scoreContainer.querySelector(".buttons .restart")
+let highScores = scoreContainer.querySelector(".buttons .highscores")
 
-startButton.addEventListener("click",function () {
-    gameContainer.style.display="block";
-    homeContainer.style.display="none";
-}) 
-
-function startGame(){
-    questionCounter = 0
-    score = 0
-    availableQuestions = [...questions]
-    getNewQuestions()
+restartQuiz.onclick = ()=>{
+    window.location.reload();
 }
 
-function getNewQuestions() {
-    var indexLength = questions.length-1
-    if (questionCounter<=indexLength) {
-        document.querySelector('#question').innerHTML=questions[questionCounter].question
-        displayChoices()
+var nextBtn = quizContainer.querySelector(".next-btn");
+
+nextBtn.onclick = ()=>{
+    if(questionCount < questions.length - 1){
+        questionCount++;
+        showQuestions(questionCount);
+    }else{
+        console.log("Questions Completed");
+        showScoreContainer();
     }
 }
 
-function displayChoices() {
-    var question = questions[questionCounter].choices
-    for (let i = 0; i<question.length; i++) {
-    var choiceContainer = document.querySelector('.choice-container')
-    var questionBtn = document.createElement("button")
-    questionBtn.innerHTML=question[i]
-    choiceContainer.append(questionBtn)
+function showQuestions(index) {
+    var questionText = document.querySelector(".question-text");
+    let questionTag = '<span>' + questions[index].question + '<span>'; 
+    let optionTag = '<div class="option">' + questions[index].options[0] + '<span></span></div>'
+                    + '<div class="option">' + questions[index].options[1] + '<span></span></div>'
+                    + '<div class="option">' + questions[index].options[2] + '<span></span></div>'
+                    + '<div class="option">' + questions[index].options[3] + '<span></span></div>';
+    questionText.innerHTML = questionTag; 
+    optionList.innerHTML = optionTag; 
+
+    var option = optionList.querySelectorAll(".option");
+    for (let i  = 0; i  < option.length; i++) {
+        option[i].setAttribute("onclick", "optionSelected(this)");
     }
-    // choices.forEach(choice => {
-    //     var number = choice.dataset['number']
-    //     choice.innerText = questionCounter['choice' + number]
-    // })
 }
 
-    // var questionsIndex = Math.floor(Math.random() * availableQuestions.length)
-    // currentQuestion = availableQuestions[questionsIndex]
-    // question.innerText = currentQuestion.question
+function optionSelected(answer){
+    let userAnswer = answer.textContent;
+    let correctAnswer = questions[questionCount].answer;
+    let allOptions = optionList.children.length;
+    if(userAnswer == correctAnswer){
+       answer.classList.add("correct");
+    }else{
+       answer.classList.add("incorrect");
+    }
 
-    // availableQuestions.splice(questionsIndex, 1)
-    
-    // acceptingAnswers = true
+    for(let i = 0; i < allOptions; i++) {
+        optionList.children[i].classList.add("disabled");
+    }
+}
 
+function showScoreContainer() {
+    homeContainer.classList.add("deactivateHome");
+    quizContainer.classList.remove("activeQuiz");
+    scoreContainer.classList.add("activeScore");
+}
 
-choices.forEach(choice => {
-    choice.addEventListener('click', event => {
-        if(!acceptingAnswers) return
-
-        acceptingAnswers = false
-        var selectedChoice = event.target
-        var selectedAnswer = selectedChoice.dataset['number']
-
-        let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' :
-        'incorrect'
-
-        if(classToApply === 'correct') {
-            incrementScore(SCORE_POINTS)
+function startTimer(time) {
+    counter = setInterval(timer, 1000);
+    function timer(){
+        timeCount.textContent = time;
+        time--; 
+        if(time <0 ){
+            clearInterval(counter);
+            timeCount.textContent = "00";
         }
-
-        selectedChoice.parentElement.classList.add(classToApply)
-
-        setTimeout(() => {
-            selectedChoice.parentElement.classList.remove(classToApply)
-            getNewQuestions()
-
-        }, 1000)
-    })
-})
-incrementScore = num => {
-    score +=num
-    scoreText.innerText = score
-}
-startGame()
-
-
-
-var userName = document.querySelector('#username')
-var saveScoreButton = document.querySelector('#saveScoreButton')
-var finalScore = document.querySelector('#finalScore')
-var mostRecentScore = localStorage.getItem('mostRecentScore')
-
-var highScores = JSON.parse(localStorage.getItem('highScores')) || []
-
-finalScore.innerText = mostRecentScore
-
-userName.addEventListener('keyup', () => {
-    saveScoreButton=!userName.value
-})
-
-saveHighScore = event => {
-    event.preventDefault()
-
-    var score = {
-        score: mostRecentScore,
-        name: userName.value
     }
-
-    highScores.push(score)
-
-    highScores.sort((a,b) => {
-        return b.score - a.score
-    })
-
-    highScores.splice()
-
-    localStorage.setItem('highScores', JSON.stringify(highScores))
-    window.location.assign('/')
 }
-
-
-
-var highScoresList = document.querySelector('#highScoresList')
-highScores.map(score => {
-    return '<li class="high-score">${score.name} - ${score.score}<li>'
-}).join('')
