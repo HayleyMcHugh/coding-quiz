@@ -1,5 +1,6 @@
 body {
-    background-color: pink;
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,200,233,1) 100%);
 }
 
 .home-container {
@@ -10,8 +11,12 @@ body {
     justify-content: center;
 }
 
+h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+
 .home-container .start-btn {
-    padding-left: 35px;
+    padding-left: 68px;
 }
 
 .quiz-container,
@@ -45,7 +50,7 @@ body {
     outline: none;
     border: none;
     border-radius: 5px;
-    background: white;
+    background: lightcyan;
     cursor: pointer;
 }
 
@@ -54,8 +59,9 @@ body {
     pointer-events: none;
     transform: translate(-50%, -50%) scale(0.5);
     width: 550px;
-    background: violet;
+    background: rgb(226, 180, 197);
     border-radius: 5px;
+    box-shadow: 0px 3px 5px 1px gray;
     opacity: 0;
     pointer-events: none;
     transform: translate(-50%, -50%) scale(0.9);
@@ -66,12 +72,12 @@ body {
     z-index: 99;
     height: 70px;
     padding: 0 30px;
-    background: white;
+    background:rgb(226, 180, 197);
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-radius: 5px 5px 0 0;
-    box-shadow: 0px 3px 5px 1px black;
+    box-shadow: 0px 3px 5px 1px gray;
 }
 
 .quiz-container header .timer {
@@ -80,8 +86,8 @@ body {
     justify-content: space-between;
     width: 145px;
     height: 45px;
-    background: cornflowerblue;
-    border: 1px solid black;
+    background: rgb(166, 214, 233);
+    border: 0.5px solid grey;
     border-radius: 5px;
     padding: 0 8px;
 }
@@ -102,7 +108,7 @@ body {
     text-align: center;
     line-height: 30px;
     border-radius: 5px;
-    border: 1px solid brown;
+    border: 1px solid grey;
     user-select: none;
 }
 
@@ -123,8 +129,8 @@ body {
 }
 
 section .option-list .option {
-    background: wheat;
-    border: 1px solid blue;
+    background: plum;
+    border: 1px solid pink;
     border-radius: 5px;
     padding: 8px 15px;
     margin-bottom: 15px;
@@ -136,7 +142,7 @@ section .option-list .option {
 }
 
 section .option-list .option:hover {
-    color: yellow;
+    color: b;
     background: white;
     border-color: plum;
 }
@@ -149,12 +155,14 @@ section .option-list .option:hover {
     color: black;
     background: green;
     border-color: green;
+    opacity: 70%;
 }
 
 .option-list .option.incorrect{
     color: black;
     background: red;
     border-color: red;
+    opacity: 70%;
 }
 
 .option-list .option.disabled {
@@ -178,21 +186,22 @@ footer .next-btn {
     border: none;
     border-radius: 5px;
     outline: none;
-    color: gray;
-    background: indigo;
+    color: black;
+    background: rgb(166, 214, 233);
     border: 1px solid black;
     cursor: pointer;
 }
 
 footer .next-btn:hover {
-    background: cadetblue;
+    background: whitesmoke;
 }
 
 .score-container {
-    background: cornflowerblue;
-    width: 450px;
+    background: rgb(166, 214, 233);
+    width: 800px;
+    height: 200px;
     padding: 25px 30px;
-    border-radius: 5px;
+    border-radius: 7px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -203,26 +212,25 @@ footer .next-btn:hover {
 }
 
 .score-container .complete-text {
-    font-size: 20px;
+    margin-top: 2%;
+    font-size: 40px;
     font-weight: 500;
 }
 
-.score-container .buttons {
+.score-container .button {
     display: flex;
     margin: 20px 0;
 }
 
-.score-container .buttons button {
+.score-container .button button {
     margin: 0 10px;
-    height: 40px;
+    height: 60px;
     padding: 0 20px;
     border: none;
     outline: none;
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 500;
     border-radius: 5px;
     border: 1px solid black;
     cursor: pointer;
 }   
-
-

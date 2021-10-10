@@ -8,7 +8,7 @@ startBtn.onclick = ()=>{
     homeContainer.classList.add("deactivateHome");
     quizContainer.classList.add("activeQuiz"); 
     showQuestions(0);
-    startTimer(30);
+    startTimer(60);
 }
 
 let questions = [
@@ -26,10 +26,10 @@ let questions = [
     {
         number: 2,
         question: "The condition in an if/else statement is enclosed within ________ ?",
-        answer: "parentheses",
+        answer: "parenthesis",
         options: [
             "quotes",
-            "parentheses",
+            "parenthesis",
             "curly brackets",
             "square brackets"
         ]
@@ -48,12 +48,12 @@ let questions = [
     {
         number: 4,
         question: "String values must be enclosed within _______ when being assigned to variables.",
-        answer: "quotes",
+        answer: "parenthesis",
         options: [
             "commas",
             "curly brackets",
             "quotes",
-            "parentheses"
+            "parenthesis"
         ]
     }, 
     {
@@ -72,8 +72,7 @@ let questions = [
 let questionCount = 0;
 let counter;
 let scoreContainer = document.querySelector(".score-container");
-let restartQuiz = scoreContainer.querySelector(".buttons .restart")
-let highScores = scoreContainer.querySelector(".buttons .highscores")
+let restartQuiz = scoreContainer.querySelector(".button .restart")
 
 restartQuiz.onclick = ()=>{
     window.location.reload();
